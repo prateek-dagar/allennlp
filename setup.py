@@ -18,6 +18,7 @@ from setuptools import find_packages, setup
 def parse_requirements_file(path, allowed_extras: set = None, include_all_extra: bool = True):
     requirements = []
     extras = defaultdict(list)
+    path = "/home/prateek/prateek/opensource/allen_nlp/allennlp/requirements.txt"
     with open(path) as requirements_file:
         import re
 
@@ -50,29 +51,29 @@ def parse_requirements_file(path, allowed_extras: set = None, include_all_extra:
     return requirements, extras
 
 
-integrations = {"checklist"}
+# integrations = {"checklist"}
 
 # Load requirements.
 install_requirements, extras = parse_requirements_file(
-    "requirements.txt", allowed_extras=integrations
-)
-dev_requirements, dev_extras = parse_requirements_file(
-    "dev-requirements.txt", allowed_extras={"examples"}, include_all_extra=False
-)
-extras["dev"] = dev_requirements
-extras.update(dev_extras)
+    "requirements.txt")#, allowed_extras=integrations
+# )
+# dev_requirements, dev_extras = parse_requirements_file(
+#     "dev-requirements.txt", allowed_extras={"examples"}, include_all_extra=False
+# )
+# extras["dev"] = dev_requirements
+# extras.update(dev_extras)
 
 # version.py defines the VERSION and VERSION_SHORT variables.
 # We use exec here so we don't import allennlp whilst setting up.
 VERSION = {}  # type: ignore
-with open("allennlp/version.py", "r") as version_file:
+with open("/home/prateek/prateek/opensource/allen_nlp/allennlp/allennlp/version.py", "r") as version_file:
     exec(version_file.read(), VERSION)
 
 setup(
     name="allennlp",
     version=VERSION["VERSION"],
     description="An open-source NLP research library, built on PyTorch.",
-    long_description=open("README.md", encoding="utf-8").read(),
+    long_description=open("/home/prateek/prateek/opensource/allen_nlp/allennlp/README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     classifiers=[
         "Intended Audience :: Science/Research",
@@ -99,9 +100,9 @@ setup(
         ]
     ),
     install_requires=install_requirements,
-    extras_require=extras,
+    # extras_require=extras,
     entry_points={"console_scripts": ["allennlp=allennlp.__main__:run"]},
     include_package_data=True,
-    python_requires=">=3.7.1",
+    python_requires=">=3.12",
     zip_safe=False,
 )
